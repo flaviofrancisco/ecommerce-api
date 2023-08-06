@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyEcommerceApp.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using MyEcommerceApp.EntityFrameworkCore;
 namespace MyEcommerceApp.Migrations
 {
     [DbContext(typeof(MyEcommerceAppDbContext))]
-    partial class MyEcommerceAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230806201147_ProductTableRequiredFields")]
+    partial class ProductTableRequiredFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
