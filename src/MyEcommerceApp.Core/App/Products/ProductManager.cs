@@ -1,10 +1,8 @@
-﻿using Abp.Application.Services;
+﻿using Abp.ObjectMapping;
 using MyEcommerceApp.App.Products.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MyEcommerceApp.App.Products
@@ -12,8 +10,12 @@ namespace MyEcommerceApp.App.Products
     public class ProductManager: IProductManager
     {
         private readonly IProductStore _productStore;
-        public ProductManager(IProductStore productStore) 
+        private readonly IObjectMapper _objectMapper;
+        public ProductManager(
+            IProductStore productStore,
+            IObjectMapper objectMapper) 
         { 
+            _objectMapper = objectMapper;
             _productStore = productStore;
         }
 
@@ -31,24 +33,47 @@ namespace MyEcommerceApp.App.Products
             return true;
         }
 
-        public async Task<Guid> CreateAsync(ProductDto input)
+        public async Task<ProductDto> CreateAsync(ProductDto input)
         {
             if (!IsValid(input))
             {
                 throw new Exception("Invalid product!");
             }
 
-            var product = new Product 
+            if (input.Id == Guid.Empty)
             { 
-                Name = input.Name,
-                Ean = input.Ean,
-                Id = input.Id,
-            };
+                input.Id = Guid.NewGuid();
+            }
+
+            var product = _objectMapper.Map<Product>(input);
+
+
+            if (product.Variants == null)
+            {
+                foreach (var variant in product.Variants)
+                {
+                    if (variant.Id == Guid.Empty)
+                    {
+                        variant.Id = Guid.NewGuid();
+                    }
+
+                    variant.ProductId = product.Id;
+                }
+            }
 
             var insertedProduct = await _productStore.CreateAsync(product);
 
-            return insertedProduct;
+            return _objectMapper.Map<ProductDto>(insertedProduct);
 
         }
+
+        public async Task<List<ProductDto>> GetAllAsync()
+        {
+            var productList = await _productStore.GetAllAsync();
+
+            return _objectMapper.Map<List<ProductDto>>(productList);
+        }
+
+
     }
 }

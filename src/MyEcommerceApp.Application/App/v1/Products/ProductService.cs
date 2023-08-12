@@ -1,9 +1,6 @@
 ﻿using MyEcommerceApp.App.Products;
 using MyEcommerceApp.App.Products.Dto;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MyEcommerceApp.App.v1.Products
@@ -17,9 +14,14 @@ namespace MyEcommerceApp.App.v1.Products
             _productManager = productManager;
         }
 
-        public async Task<Guid> CreateAsync(ProductDto input)
+        public async Task<ProductDto> CreateAsync(ProductDto input)
         {
             return await _productManager.CreateAsync(input);
+        }
+
+        public async Task<List<ProductDto>> GetAllAsync()
+        {
+            return await _productManager.GetAllAsync();
         }
     }
 }

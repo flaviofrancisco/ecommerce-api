@@ -1,4 +1,5 @@
-﻿using Abp.Localization;
+﻿using Abp.AutoMapper;
+using Abp.Localization;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Runtime.Security;
@@ -14,6 +15,7 @@ using MyEcommerceApp.Timing;
 
 namespace MyEcommerceApp
 {
+    [DependsOn(typeof(AbpAutoMapperModule))]
     [DependsOn(typeof(AbpZeroCoreModule))]
     public class MyEcommerceAppCoreModule : AbpModule
     {
@@ -40,6 +42,11 @@ namespace MyEcommerceApp
             
             Configuration.Settings.SettingEncryptionConfiguration.DefaultPassPhrase = MyEcommerceAppConsts.DefaultPassPhrase;
             SimpleStringCipher.DefaultPassPhrase = MyEcommerceAppConsts.DefaultPassPhrase;
+
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(config =>
+            {
+                AutoMapperConfig.ConfingMapping(config);
+            });
         }
 
         public override void Initialize()

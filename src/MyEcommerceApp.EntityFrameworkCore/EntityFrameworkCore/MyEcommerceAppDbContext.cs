@@ -11,6 +11,7 @@ namespace MyEcommerceApp.EntityFrameworkCore
     {
         /* Define a DbSet for each entity of the application */
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductVariant> ProductVariants { get; set; }
         
         public MyEcommerceAppDbContext(DbContextOptions<MyEcommerceAppDbContext> options)
             : base(options)

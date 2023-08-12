@@ -1,8 +1,7 @@
 ﻿using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MyEcommerceApp.App.Products
@@ -10,17 +9,25 @@ namespace MyEcommerceApp.App.Products
     public class ProductStore : IProductStore
     {
         private readonly IRepository<Product, Guid> _productRepository;
-
-        public ProductStore(IRepository<Product, Guid> productRepository)
+        private readonly IRepository<ProductVariant, Guid> _productVariantRepository;
+        public ProductStore(
+            IRepository<Product, Guid> productRepository,
+            IRepository<ProductVariant, Guid> productVariantRepository)
         { 
             _productRepository = productRepository;
+            _productVariantRepository = productVariantRepository;
+        }
+                
+        public async Task<Product> CreateAsync(Product product)
+        {
+            _ = await _productRepository.InsertAsync(product);
+
+            return product;
         }
 
-        public async Task<Guid> CreateAsync(Product product)
+        public async Task<List<Product>> GetAllAsync()
         {
-            var insertedProduct = await _productRepository.InsertAsync(product);
-
-            return insertedProduct.Id;
+            return await _productRepository.GetAllListAsync();
         }
     }
 }

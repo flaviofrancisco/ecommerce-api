@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyEcommerceApp.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using MyEcommerceApp.EntityFrameworkCore;
 namespace MyEcommerceApp.Migrations
 {
     [DbContext(typeof(MyEcommerceAppDbContext))]
-    partial class MyEcommerceAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230812110302_ProductVariant2")]
+    partial class ProductVariant2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1401,12 +1404,7 @@ namespace MyEcommerceApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductVariants");
                 });
@@ -1854,17 +1852,6 @@ namespace MyEcommerceApp.Migrations
                     b.Navigation("WebhookEvent");
                 });
 
-            modelBuilder.Entity("MyEcommerceApp.App.Products.ProductVariant", b =>
-                {
-                    b.HasOne("MyEcommerceApp.App.Products.Product", "Product")
-                        .WithMany("Variants")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("MyEcommerceApp.Authorization.Roles.Role", b =>
                 {
                     b.HasOne("MyEcommerceApp.Authorization.Users.User", "CreatorUser")
@@ -1981,11 +1968,6 @@ namespace MyEcommerceApp.Migrations
             modelBuilder.Entity("Abp.Organizations.OrganizationUnit", b =>
                 {
                     b.Navigation("Children");
-                });
-
-            modelBuilder.Entity("MyEcommerceApp.App.Products.Product", b =>
-                {
-                    b.Navigation("Variants");
                 });
 
             modelBuilder.Entity("MyEcommerceApp.Authorization.Roles.Role", b =>
