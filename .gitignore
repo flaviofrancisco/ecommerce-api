@@ -254,3 +254,4 @@ paket-files/
 src/MyEcommerceApp.Web.Mvc/secrets.json
 src/MyEcommerceApp.Web.Host/secrets.json
 src/MyEcommerceApp.Migrator/secrets.json
+/src/MyEcommerceApp.Web.Host/App_Data/Logs/Logs.txt
