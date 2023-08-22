@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyEcommerceApp.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using MyEcommerceApp.EntityFrameworkCore;
 namespace MyEcommerceApp.Migrations
 {
     [DbContext(typeof(MyEcommerceAppDbContext))]
-    partial class MyEcommerceAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230822201059_Product-Relations-Tables")]
+    partial class ProductRelationsTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +66,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpEditions", (string)null);
+                    b.ToTable("AbpEditions");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.FeatureSetting", b =>
@@ -99,7 +102,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpFeatures", (string)null);
+                    b.ToTable("AbpFeatures");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("FeatureSetting");
 
@@ -164,7 +167,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpAuditLogs", (string)null);
+                    b.ToTable("AbpAuditLogs");
                 });
 
             modelBuilder.Entity("Abp.Authorization.PermissionSetting", b =>
@@ -198,7 +201,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpPermissions", (string)null);
+                    b.ToTable("AbpPermissions");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("PermissionSetting");
 
@@ -236,7 +239,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AbpRoleClaims", (string)null);
+                    b.ToTable("AbpRoleClaims");
                 });
 
             modelBuilder.Entity("Abp.Authorization.Users.AbpUser<MyEcommerceApp.Authorization.Users.User>", b =>
@@ -363,7 +366,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("LastModifierUserId");
 
-                    b.ToTable("AbpUsers", (string)null);
+                    b.ToTable("AbpUsers");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("AbpUser<User>");
 
@@ -418,7 +421,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpUserAccounts", (string)null);
+                    b.ToTable("AbpUserAccounts");
                 });
 
             modelBuilder.Entity("Abp.Authorization.Users.UserClaim", b =>
@@ -452,7 +455,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AbpUserClaims", (string)null);
+                    b.ToTable("AbpUserClaims");
                 });
 
             modelBuilder.Entity("Abp.Authorization.Users.UserLogin", b =>
@@ -483,7 +486,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AbpUserLogins", (string)null);
+                    b.ToTable("AbpUserLogins");
                 });
 
             modelBuilder.Entity("Abp.Authorization.Users.UserLoginAttempt", b =>
@@ -528,7 +531,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpUserLoginAttempts", (string)null);
+                    b.ToTable("AbpUserLoginAttempts");
                 });
 
             modelBuilder.Entity("Abp.Authorization.Users.UserOrganizationUnit", b =>
@@ -559,7 +562,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpUserOrganizationUnits", (string)null);
+                    b.ToTable("AbpUserOrganizationUnits");
                 });
 
             modelBuilder.Entity("Abp.Authorization.Users.UserRole", b =>
@@ -589,7 +592,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AbpUserRoles", (string)null);
+                    b.ToTable("AbpUserRoles");
                 });
 
             modelBuilder.Entity("Abp.Authorization.Users.UserToken", b =>
@@ -628,7 +631,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("AbpUserId");
 
-                    b.ToTable("AbpUserTokens", (string)null);
+                    b.ToTable("AbpUserTokens");
                 });
 
             modelBuilder.Entity("Abp.BackgroundJobs.BackgroundJobInfo", b =>
@@ -672,7 +675,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpBackgroundJobs", (string)null);
+                    b.ToTable("AbpBackgroundJobs");
                 });
 
             modelBuilder.Entity("Abp.Configuration.Setting", b =>
@@ -713,7 +716,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AbpSettings", (string)null);
+                    b.ToTable("AbpSettings");
                 });
 
             modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicEntityProperty", b =>
@@ -738,7 +741,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("DynamicPropertyId");
 
-                    b.ToTable("AbpDynamicEntityProperties", (string)null);
+                    b.ToTable("AbpDynamicEntityProperties");
                 });
 
             modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicEntityPropertyValue", b =>
@@ -766,7 +769,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("DynamicEntityPropertyId");
 
-                    b.ToTable("AbpDynamicEntityPropertyValues", (string)null);
+                    b.ToTable("AbpDynamicEntityPropertyValues");
                 });
 
             modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicProperty", b =>
@@ -795,7 +798,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpDynamicProperties", (string)null);
+                    b.ToTable("AbpDynamicProperties");
                 });
 
             modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicPropertyValue", b =>
@@ -820,7 +823,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("DynamicPropertyId");
 
-                    b.ToTable("AbpDynamicPropertyValues", (string)null);
+                    b.ToTable("AbpDynamicPropertyValues");
                 });
 
             modelBuilder.Entity("Abp.EntityHistory.EntityChange", b =>
@@ -855,7 +858,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("EntityChangeSetId");
 
-                    b.ToTable("AbpEntityChanges", (string)null);
+                    b.ToTable("AbpEntityChanges");
                 });
 
             modelBuilder.Entity("Abp.EntityHistory.EntityChangeSet", b =>
@@ -902,7 +905,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpEntityChangeSets", (string)null);
+                    b.ToTable("AbpEntityChangeSets");
                 });
 
             modelBuilder.Entity("Abp.EntityHistory.EntityPropertyChange", b =>
@@ -945,7 +948,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("EntityChangeId");
 
-                    b.ToTable("AbpEntityPropertyChanges", (string)null);
+                    b.ToTable("AbpEntityPropertyChanges");
                 });
 
             modelBuilder.Entity("Abp.Localization.ApplicationLanguage", b =>
@@ -999,7 +1002,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpLanguages", (string)null);
+                    b.ToTable("AbpLanguages");
                 });
 
             modelBuilder.Entity("Abp.Localization.ApplicationLanguageText", b =>
@@ -1047,7 +1050,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpLanguageTexts", (string)null);
+                    b.ToTable("AbpLanguageTexts");
                 });
 
             modelBuilder.Entity("Abp.Notifications.NotificationInfo", b =>
@@ -1108,7 +1111,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpNotifications", (string)null);
+                    b.ToTable("AbpNotifications");
                 });
 
             modelBuilder.Entity("Abp.Notifications.NotificationSubscriptionInfo", b =>
@@ -1147,7 +1150,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpNotificationSubscriptions", (string)null);
+                    b.ToTable("AbpNotificationSubscriptions");
                 });
 
             modelBuilder.Entity("Abp.Notifications.TenantNotificationInfo", b =>
@@ -1195,7 +1198,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpTenantNotifications", (string)null);
+                    b.ToTable("AbpTenantNotifications");
                 });
 
             modelBuilder.Entity("Abp.Notifications.UserNotificationInfo", b =>
@@ -1225,7 +1228,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpUserNotifications", (string)null);
+                    b.ToTable("AbpUserNotifications");
                 });
 
             modelBuilder.Entity("Abp.Organizations.OrganizationUnit", b =>
@@ -1277,7 +1280,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("AbpOrganizationUnits", (string)null);
+                    b.ToTable("AbpOrganizationUnits");
                 });
 
             modelBuilder.Entity("Abp.Organizations.OrganizationUnitRole", b =>
@@ -1308,7 +1311,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpOrganizationUnitRoles", (string)null);
+                    b.ToTable("AbpOrganizationUnitRoles");
                 });
 
             modelBuilder.Entity("Abp.Webhooks.WebhookEvent", b =>
@@ -1338,7 +1341,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpWebhookEvents", (string)null);
+                    b.ToTable("AbpWebhookEvents");
                 });
 
             modelBuilder.Entity("Abp.Webhooks.WebhookSendAttempt", b =>
@@ -1372,7 +1375,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("WebhookEventId");
 
-                    b.ToTable("AbpWebhookSendAttempts", (string)null);
+                    b.ToTable("AbpWebhookSendAttempts");
                 });
 
             modelBuilder.Entity("Abp.Webhooks.WebhookSubscriptionInfo", b =>
@@ -1409,7 +1412,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpWebhookSubscriptions", (string)null);
+                    b.ToTable("AbpWebhookSubscriptions");
                 });
 
             modelBuilder.Entity("CategoryProduct", b =>
@@ -1424,7 +1427,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("ProductsId");
 
-                    b.ToTable("CategoryProduct", (string)null);
+                    b.ToTable("CategoryProduct");
                 });
 
             modelBuilder.Entity("MyEcommerceApp.App.Categories.Category", b =>
@@ -1465,7 +1468,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("MyEcommerceApp.App.Products.Product", b =>
@@ -1510,7 +1513,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("VolumeId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("MyEcommerceApp.App.Products.ProductCategory", b =>
@@ -1571,7 +1574,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductVariants", (string)null);
+                    b.ToTable("ProductVariants");
                 });
 
             modelBuilder.Entity("MyEcommerceApp.App.Sizes.Size", b =>
@@ -1604,7 +1607,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("LastUpdateUserId");
 
-                    b.ToTable("Sizes", (string)null);
+                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("MyEcommerceApp.App.Taxes.Tax", b =>
@@ -1640,7 +1643,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("LastUpdateUserId");
 
-                    b.ToTable("Taxes", (string)null);
+                    b.ToTable("Taxes");
                 });
 
             modelBuilder.Entity("MyEcommerceApp.App.Volumes.Volume", b =>
@@ -1673,7 +1676,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("LastUpdateUserId");
 
-                    b.ToTable("Volumes", (string)null);
+                    b.ToTable("Volumes");
                 });
 
             modelBuilder.Entity("MyEcommerceApp.Authorization.Roles.Role", b =>
@@ -1745,7 +1748,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("LastModifierUserId");
 
-                    b.ToTable("AbpRoles", (string)null);
+                    b.ToTable("AbpRoles");
                 });
 
             modelBuilder.Entity("MyEcommerceApp.MultiTenancy.Tenant", b =>
@@ -1816,7 +1819,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("LastModifierUserId1");
 
-                    b.ToTable("AbpTenants", (string)null);
+                    b.ToTable("AbpTenants");
                 });
 
             modelBuilder.Entity("ProductTax", b =>
@@ -1831,7 +1834,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("TaxesId");
 
-                    b.ToTable("ProductTax", (string)null);
+                    b.ToTable("ProductTax");
                 });
 
             modelBuilder.Entity("ProductVariantSize", b =>
@@ -1846,7 +1849,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("SizesId");
 
-                    b.ToTable("ProductVariantSize", (string)null);
+                    b.ToTable("ProductVariantSize");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>
@@ -1858,7 +1861,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("EditionId");
 
-                    b.ToTable("AbpFeatures", (string)null);
+                    b.ToTable("AbpFeatures");
 
                     b.HasDiscriminator().HasValue("EditionFeatureSetting");
                 });
@@ -1867,7 +1870,7 @@ namespace MyEcommerceApp.Migrations
                 {
                     b.HasBaseType("Abp.Application.Features.FeatureSetting");
 
-                    b.ToTable("AbpFeatures", (string)null);
+                    b.ToTable("AbpFeatures");
 
                     b.HasDiscriminator().HasValue("TenantFeatureSetting");
                 });
@@ -1881,7 +1884,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AbpPermissions", (string)null);
+                    b.ToTable("AbpPermissions");
 
                     b.HasDiscriminator().HasValue("RolePermissionSetting");
                 });
@@ -1895,7 +1898,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AbpPermissions", (string)null);
+                    b.ToTable("AbpPermissions");
 
                     b.HasDiscriminator().HasValue("UserPermissionSetting");
                 });
@@ -1904,7 +1907,7 @@ namespace MyEcommerceApp.Migrations
                 {
                     b.HasBaseType("Abp.Authorization.Users.AbpUser<MyEcommerceApp.Authorization.Users.User>");
 
-                    b.ToTable("AbpUsers", (string)null);
+                    b.ToTable("AbpUsers");
 
                     b.HasDiscriminator().HasValue("User");
                 });

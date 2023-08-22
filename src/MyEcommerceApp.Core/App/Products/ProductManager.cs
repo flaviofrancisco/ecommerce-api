@@ -74,6 +74,5 @@ namespace MyEcommerceApp.App.Products
             return _objectMapper.Map<List<ProductDto>>(productList);
         }
 
-
     }
 }

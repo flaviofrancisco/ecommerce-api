@@ -27,7 +27,7 @@ namespace MyEcommerceApp.Authorization.Users
             };
 
             user.SetNormalizedNames();
-
+                        
             return user;
         }
     }
