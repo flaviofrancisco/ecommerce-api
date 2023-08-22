@@ -18,8 +18,8 @@ namespace MyEcommerceApp.App.Products
 
         public Guid ProductId { get; set; }
 
-        [ForeignKey("ProductId")]
-        public Product Product { get; set; }
-        public ICollection<Size> Sizes { get; set; }
+        [ForeignKey(nameof(ProductId))]
+        public virtual Product Product { get; set; }
+        public virtual ICollection<Size> Sizes { get; set; }
     }
 }

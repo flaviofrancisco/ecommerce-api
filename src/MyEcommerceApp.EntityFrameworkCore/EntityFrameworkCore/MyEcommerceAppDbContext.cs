@@ -9,6 +9,7 @@ using MyEcommerceApp.App.Categories;
 using MyEcommerceApp.App.Volumes;
 using MyEcommerceApp.App.Sizes;
 using System.Linq;
+using Abp.MultiTenancy;
 
 namespace MyEcommerceApp.EntityFrameworkCore
 {
@@ -41,11 +42,15 @@ namespace MyEcommerceApp.EntityFrameworkCore
                 .HasForeignKey(c => c.ParentId)
                 .OnDelete(DeleteBehavior.Restrict); // Turn off cascading delete
 
-            // Configure cascade delete behavior for each foreign key relationship
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            {
-                relationship.DeleteBehavior = DeleteBehavior.Restrict;
-            }
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.CreatorUser).WithMany().HasForeignKey(x => x.CreatorUserId);
+
+            modelBuilder.Entity<User>().HasOne(u => u.DeleterUser).WithMany().HasForeignKey(u => u.DeleterUserId);
+
+            modelBuilder.Entity<User>().HasOne(u => u.LastModifierUser).WithMany().HasForeignKey(u => u.LastModifierUserId);
+
+            modelBuilder.Entity<Tenant>().HasOne(t => t.CreatorUser).WithMany().HasForeignKey(t => t.CreatorUserId);
+
         }
     }
 }

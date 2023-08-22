@@ -12,8 +12,8 @@ using MyEcommerceApp.EntityFrameworkCore;
 namespace MyEcommerceApp.Migrations
 {
     [DbContext(typeof(MyEcommerceAppDbContext))]
-    [Migration("20230812120758_Product_Product_Variant_FK")]
-    partial class Product_Product_Variant_FK
+    [Migration("20230822213953_Initial-Migration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,28 +118,22 @@ namespace MyEcommerceApp.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("BrowserInfo")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClientIpAddress")
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClientName")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CustomData")
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Exception")
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ExceptionMessage")
-                        .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ExecutionDuration")
                         .HasColumnType("int");
@@ -154,19 +148,16 @@ namespace MyEcommerceApp.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("MethodName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Parameters")
-                        .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReturnValue")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ServiceName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TenantId")
                         .HasColumnType("int");
@@ -175,12 +166,6 @@ namespace MyEcommerceApp.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId", "ExecutionDuration");
-
-                    b.HasIndex("TenantId", "ExecutionTime");
-
-                    b.HasIndex("TenantId", "UserId");
 
                     b.ToTable("AbpAuditLogs");
                 });
@@ -215,8 +200,6 @@ namespace MyEcommerceApp.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId", "Name");
 
                     b.ToTable("AbpPermissions");
 
@@ -255,8 +238,6 @@ namespace MyEcommerceApp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("TenantId", "ClaimType");
 
                     b.ToTable("AbpRoleClaims");
                 });
@@ -309,16 +290,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmailAddress");
-
-                    b.HasIndex("UserName");
-
-                    b.HasIndex("TenantId", "EmailAddress");
-
-                    b.HasIndex("TenantId", "UserId");
-
-                    b.HasIndex("TenantId", "UserName");
-
                     b.ToTable("AbpUserAccounts");
                 });
 
@@ -353,8 +324,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("TenantId", "ClaimType");
-
                     b.ToTable("AbpUserClaims");
                 });
 
@@ -385,14 +354,6 @@ namespace MyEcommerceApp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("ProviderKey", "TenantId")
-                        .IsUnique()
-                        .HasFilter("[TenantId] IS NOT NULL");
-
-                    b.HasIndex("TenantId", "UserId");
-
-                    b.HasIndex("TenantId", "LoginProvider", "ProviderKey");
 
                     b.ToTable("AbpUserLogins");
                 });
@@ -439,10 +400,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId", "TenantId");
-
-                    b.HasIndex("TenancyName", "UserNameOrEmailAddress", "Result");
-
                     b.ToTable("AbpUserLoginAttempts");
                 });
 
@@ -474,10 +431,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TenantId", "OrganizationUnitId");
-
-                    b.HasIndex("TenantId", "UserId");
-
                     b.ToTable("AbpUserOrganizationUnits");
                 });
 
@@ -507,10 +460,6 @@ namespace MyEcommerceApp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("TenantId", "RoleId");
-
-                    b.HasIndex("TenantId", "UserId");
 
                     b.ToTable("AbpUserRoles");
                 });
@@ -547,8 +496,6 @@ namespace MyEcommerceApp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("TenantId", "UserId");
 
                     b.ToTable("AbpUserTokens");
                 });
@@ -594,8 +541,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IsAbandoned", "NextTryTime");
-
                     b.ToTable("AbpBackgroundJobs");
                 });
 
@@ -637,9 +582,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("TenantId", "Name", "UserId")
-                        .IsUnique();
-
                     b.ToTable("AbpSettings");
                 });
 
@@ -664,10 +606,6 @@ namespace MyEcommerceApp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DynamicPropertyId");
-
-                    b.HasIndex("EntityFullName", "DynamicPropertyId", "TenantId")
-                        .IsUnique()
-                        .HasFilter("[EntityFullName] IS NOT NULL AND [TenantId] IS NOT NULL");
 
                     b.ToTable("AbpDynamicEntityProperties");
                 });
@@ -725,10 +663,6 @@ namespace MyEcommerceApp.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PropertyName", "TenantId")
-                        .IsUnique()
-                        .HasFilter("[PropertyName] IS NOT NULL AND [TenantId] IS NOT NULL");
 
                     b.ToTable("AbpDynamicProperties");
                 });
@@ -790,8 +724,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("EntityChangeSetId");
 
-                    b.HasIndex("EntityTypeFullName", "EntityId");
-
                     b.ToTable("AbpEntityChanges");
                 });
 
@@ -838,12 +770,6 @@ namespace MyEcommerceApp.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId", "CreationTime");
-
-                    b.HasIndex("TenantId", "Reason");
-
-                    b.HasIndex("TenantId", "UserId");
 
                     b.ToTable("AbpEntityChangeSets");
                 });
@@ -942,8 +868,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TenantId", "Name");
-
                     b.ToTable("AbpLanguages");
                 });
 
@@ -991,8 +915,6 @@ namespace MyEcommerceApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId", "Source", "LanguageName", "Key");
 
                     b.ToTable("AbpLanguageTexts");
                 });
@@ -1094,10 +1016,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NotificationName", "EntityTypeName", "EntityId", "UserId");
-
-                    b.HasIndex("TenantId", "NotificationName", "EntityTypeName", "EntityId", "UserId");
-
                     b.ToTable("AbpNotificationSubscriptions");
                 });
 
@@ -1146,8 +1064,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TenantId");
-
                     b.ToTable("AbpTenantNotifications");
                 });
 
@@ -1177,8 +1093,6 @@ namespace MyEcommerceApp.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId", "State", "CreationTime");
 
                     b.ToTable("AbpUserNotifications");
                 });
@@ -1232,8 +1146,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.HasIndex("TenantId", "Code");
-
                     b.ToTable("AbpOrganizationUnits");
                 });
 
@@ -1264,10 +1176,6 @@ namespace MyEcommerceApp.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId", "OrganizationUnitId");
-
-                    b.HasIndex("TenantId", "RoleId");
 
                     b.ToTable("AbpOrganizationUnitRoles");
                 });
@@ -1373,18 +1281,146 @@ namespace MyEcommerceApp.Migrations
                     b.ToTable("AbpWebhookSubscriptions");
                 });
 
+            modelBuilder.Entity("CategoryProduct", b =>
+                {
+                    b.Property<Guid>("CategoriesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CategoriesId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("CategoryProduct");
+                });
+
+            modelBuilder.Entity("MyEcommerceApp.App.Categories.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("LastUpateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ParentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorUserId");
+
+                    b.HasIndex("DeleterUserId");
+
+                    b.HasIndex("LastModifierUserId");
+
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("MyEcommerceApp.App.Products.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("LastUpateDateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ValueBeforeTax")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("VolumeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<float>("VolumeValue")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatorUserId");
+
+                    b.HasIndex("DeleterUserId");
+
+                    b.HasIndex("LastModifierUserId");
+
+                    b.HasIndex("TenantId");
+
+                    b.HasIndex("VolumeId");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("MyEcommerceApp.App.Products.ProductCategory", b =>
+                {
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(1);
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(2);
+
+                    b.HasKey("ProductId", "CategoryId");
+
+                    b.ToTable("ProductCategories", (string)null);
                 });
 
             modelBuilder.Entity("MyEcommerceApp.App.Products.ProductVariant", b =>
@@ -1392,6 +1428,18 @@ namespace MyEcommerceApp.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -1401,17 +1449,178 @@ namespace MyEcommerceApp.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("LastUpateDateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatorUserId");
+
+                    b.HasIndex("DeleterUserId");
+
+                    b.HasIndex("LastModifierUserId");
 
                     b.HasIndex("ProductId");
 
+                    b.HasIndex("TenantId");
+
                     b.ToTable("ProductVariants");
+                });
+
+            modelBuilder.Entity("MyEcommerceApp.App.Sizes.Size", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("LastUpateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorUserId");
+
+                    b.HasIndex("DeleterUserId");
+
+                    b.HasIndex("LastModifierUserId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Sizes");
+                });
+
+            modelBuilder.Entity("MyEcommerceApp.App.Taxes.Tax", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("LastUpateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Value")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorUserId");
+
+                    b.HasIndex("DeleterUserId");
+
+                    b.HasIndex("LastModifierUserId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Taxes");
+                });
+
+            modelBuilder.Entity("MyEcommerceApp.App.Volumes.Volume", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("LastUpateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorUserId");
+
+                    b.HasIndex("DeleterUserId");
+
+                    b.HasIndex("LastModifierUserId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Volumes");
                 });
 
             modelBuilder.Entity("MyEcommerceApp.Authorization.Roles.Role", b =>
@@ -1423,7 +1632,6 @@ namespace MyEcommerceApp.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
@@ -1484,8 +1692,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("LastModifierUserId");
 
-                    b.HasIndex("TenantId", "NormalizedName");
-
                     b.ToTable("AbpRoles");
                 });
 
@@ -1505,7 +1711,6 @@ namespace MyEcommerceApp.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
@@ -1610,10 +1815,6 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("LastModifierUserId");
 
-                    b.HasIndex("TenantId", "NormalizedEmailAddress");
-
-                    b.HasIndex("TenantId", "NormalizedUserName");
-
                     b.ToTable("AbpUsers");
                 });
 
@@ -1638,6 +1839,9 @@ namespace MyEcommerceApp.Migrations
                     b.Property<long?>("DeleterUserId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("DeleterUserId1")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime?>("DeletionTime")
                         .HasColumnType("datetime2");
 
@@ -1656,6 +1860,9 @@ namespace MyEcommerceApp.Migrations
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("LastModifierUserId1")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
@@ -1670,15 +1877,43 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasIndex("CreatorUserId");
 
-                    b.HasIndex("DeleterUserId");
+                    b.HasIndex("DeleterUserId1");
 
                     b.HasIndex("EditionId");
 
-                    b.HasIndex("LastModifierUserId");
-
-                    b.HasIndex("TenancyName");
+                    b.HasIndex("LastModifierUserId1");
 
                     b.ToTable("AbpTenants");
+                });
+
+            modelBuilder.Entity("ProductTax", b =>
+                {
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TaxesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ProductsId", "TaxesId");
+
+                    b.HasIndex("TaxesId");
+
+                    b.ToTable("ProductTax");
+                });
+
+            modelBuilder.Entity("ProductVariantSize", b =>
+                {
+                    b.Property<Guid>("ProductVariantsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SizesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ProductVariantsId", "SizesId");
+
+                    b.HasIndex("SizesId");
+
+                    b.ToTable("ProductVariantSize");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>
@@ -1688,7 +1923,7 @@ namespace MyEcommerceApp.Migrations
                     b.Property<int>("EditionId")
                         .HasColumnType("int");
 
-                    b.HasIndex("EditionId", "Name");
+                    b.HasIndex("EditionId");
 
                     b.ToTable("AbpFeatures");
 
@@ -1698,8 +1933,6 @@ namespace MyEcommerceApp.Migrations
             modelBuilder.Entity("Abp.MultiTenancy.TenantFeatureSetting", b =>
                 {
                     b.HasBaseType("Abp.Application.Features.FeatureSetting");
-
-                    b.HasIndex("TenantId", "Name");
 
                     b.ToTable("AbpFeatures");
 
@@ -1857,15 +2090,203 @@ namespace MyEcommerceApp.Migrations
                     b.Navigation("WebhookEvent");
                 });
 
+            modelBuilder.Entity("CategoryProduct", b =>
+                {
+                    b.HasOne("MyEcommerceApp.App.Categories.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyEcommerceApp.App.Products.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MyEcommerceApp.App.Categories.Category", b =>
+                {
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "CreatorUser")
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "DeleterUser")
+                        .WithMany()
+                        .HasForeignKey("DeleterUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "LastModifierUser")
+                        .WithMany()
+                        .HasForeignKey("LastModifierUserId");
+
+                    b.HasOne("MyEcommerceApp.App.Categories.Category", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MyEcommerceApp.MultiTenancy.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
+                    b.Navigation("CreatorUser");
+
+                    b.Navigation("DeleterUser");
+
+                    b.Navigation("LastModifierUser");
+
+                    b.Navigation("Parent");
+
+                    b.Navigation("Tenant");
+                });
+
+            modelBuilder.Entity("MyEcommerceApp.App.Products.Product", b =>
+                {
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "CreatorUser")
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "DeleterUser")
+                        .WithMany()
+                        .HasForeignKey("DeleterUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "LastModifierUser")
+                        .WithMany()
+                        .HasForeignKey("LastModifierUserId");
+
+                    b.HasOne("MyEcommerceApp.MultiTenancy.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
+                    b.HasOne("MyEcommerceApp.App.Volumes.Volume", "Volume")
+                        .WithMany()
+                        .HasForeignKey("VolumeId");
+
+                    b.Navigation("CreatorUser");
+
+                    b.Navigation("DeleterUser");
+
+                    b.Navigation("LastModifierUser");
+
+                    b.Navigation("Tenant");
+
+                    b.Navigation("Volume");
+                });
+
             modelBuilder.Entity("MyEcommerceApp.App.Products.ProductVariant", b =>
                 {
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "CreatorUser")
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "DeleterUser")
+                        .WithMany()
+                        .HasForeignKey("DeleterUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "LastModifierUser")
+                        .WithMany()
+                        .HasForeignKey("LastModifierUserId");
+
                     b.HasOne("MyEcommerceApp.App.Products.Product", "Product")
                         .WithMany("Variants")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MyEcommerceApp.MultiTenancy.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
+                    b.Navigation("CreatorUser");
+
+                    b.Navigation("DeleterUser");
+
+                    b.Navigation("LastModifierUser");
+
                     b.Navigation("Product");
+
+                    b.Navigation("Tenant");
+                });
+
+            modelBuilder.Entity("MyEcommerceApp.App.Sizes.Size", b =>
+                {
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "CreatorUser")
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "DeleterUser")
+                        .WithMany()
+                        .HasForeignKey("DeleterUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "LastModifierUser")
+                        .WithMany()
+                        .HasForeignKey("LastModifierUserId");
+
+                    b.HasOne("MyEcommerceApp.MultiTenancy.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
+                    b.Navigation("CreatorUser");
+
+                    b.Navigation("DeleterUser");
+
+                    b.Navigation("LastModifierUser");
+
+                    b.Navigation("Tenant");
+                });
+
+            modelBuilder.Entity("MyEcommerceApp.App.Taxes.Tax", b =>
+                {
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "CreatorUser")
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "DeleterUser")
+                        .WithMany()
+                        .HasForeignKey("DeleterUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "LastModifierUser")
+                        .WithMany()
+                        .HasForeignKey("LastModifierUserId");
+
+                    b.HasOne("MyEcommerceApp.MultiTenancy.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
+                    b.Navigation("CreatorUser");
+
+                    b.Navigation("DeleterUser");
+
+                    b.Navigation("LastModifierUser");
+
+                    b.Navigation("Tenant");
+                });
+
+            modelBuilder.Entity("MyEcommerceApp.App.Volumes.Volume", b =>
+                {
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "CreatorUser")
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "DeleterUser")
+                        .WithMany()
+                        .HasForeignKey("DeleterUserId");
+
+                    b.HasOne("MyEcommerceApp.Authorization.Users.User", "LastModifierUser")
+                        .WithMany()
+                        .HasForeignKey("LastModifierUserId");
+
+                    b.HasOne("MyEcommerceApp.MultiTenancy.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
+                    b.Navigation("CreatorUser");
+
+                    b.Navigation("DeleterUser");
+
+                    b.Navigation("LastModifierUser");
+
+                    b.Navigation("Tenant");
                 });
 
             modelBuilder.Entity("MyEcommerceApp.Authorization.Roles.Role", b =>
@@ -1918,7 +2339,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasOne("MyEcommerceApp.Authorization.Users.User", "DeleterUser")
                         .WithMany()
-                        .HasForeignKey("DeleterUserId");
+                        .HasForeignKey("DeleterUserId1");
 
                     b.HasOne("Abp.Application.Editions.Edition", "Edition")
                         .WithMany()
@@ -1926,7 +2347,7 @@ namespace MyEcommerceApp.Migrations
 
                     b.HasOne("MyEcommerceApp.Authorization.Users.User", "LastModifierUser")
                         .WithMany()
-                        .HasForeignKey("LastModifierUserId");
+                        .HasForeignKey("LastModifierUserId1");
 
                     b.Navigation("CreatorUser");
 
@@ -1935,6 +2356,36 @@ namespace MyEcommerceApp.Migrations
                     b.Navigation("Edition");
 
                     b.Navigation("LastModifierUser");
+                });
+
+            modelBuilder.Entity("ProductTax", b =>
+                {
+                    b.HasOne("MyEcommerceApp.App.Products.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyEcommerceApp.App.Taxes.Tax", null)
+                        .WithMany()
+                        .HasForeignKey("TaxesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProductVariantSize", b =>
+                {
+                    b.HasOne("MyEcommerceApp.App.Products.ProductVariant", null)
+                        .WithMany()
+                        .HasForeignKey("ProductVariantsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyEcommerceApp.App.Sizes.Size", null)
+                        .WithMany()
+                        .HasForeignKey("SizesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>

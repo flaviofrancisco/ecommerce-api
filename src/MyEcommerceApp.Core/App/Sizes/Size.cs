@@ -9,6 +9,6 @@ namespace MyEcommerceApp.App.Sizes
     public class Size: BaseEntity
     {
         public string Name { get; set; }
-        public ICollection<ProductVariant> ProductVariants { get; set; }
+        public virtual ICollection<ProductVariant> ProductVariants { get; set; }
     }
 }

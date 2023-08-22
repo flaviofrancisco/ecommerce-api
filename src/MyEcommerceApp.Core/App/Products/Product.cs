@@ -24,8 +24,8 @@ namespace MyEcommerceApp.App.Products
 
         [ForeignKey(nameof(VolumeId))]
         public virtual Volume Volume {get; set;}
-        public ICollection<Category> Categories { get; set; }
-        public ICollection<Tax> Taxes { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Tax> Taxes { get; set; }
 
     }
 }
