@@ -30,11 +30,9 @@ namespace MyEcommerceApp.EntityFrameworkCore
                         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {            
-            modelBuilder.Entity<ProductCategory>()
-                .HasKey(pc => new { pc.ProductId, pc.CategoryId }); // Define composite primary key
 
             modelBuilder.Entity<ProductCategory>()
-                .ToTable("ProductCategories"); // Define the table name
+                .ToTable("ProductCategories").HasKey(pc => new { pc.ProductId, pc.CategoryId }); // Define the table name
 
             modelBuilder.Entity<Category>()
                 .HasOne(c => c.Parent)

@@ -4,7 +4,6 @@ using MyEcommerceApp.App.Categories;
 using MyEcommerceApp.App.Commons;
 using MyEcommerceApp.App.Taxes;
 using MyEcommerceApp.App.Volumes;
-using MyEcommerceApp.Authorization.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +17,12 @@ namespace MyEcommerceApp.App.Products
         [MaxLength(1000)]
         public string Name { get; set; }
         public ICollection<ProductVariant> Variants { get; set; }
+        public decimal ValueAfterTax { get; set; }
         public decimal ValueBeforeTax { get; set; }
+        /// <summary>
+        /// the amount added to the cost price of goods to cover overheads and profit (%)
+        /// </summary>
+        public decimal Markup { get; set; }        
         public float VolumeValue { get; set; }
         public Guid? VolumeId { get; set; }
 
@@ -26,6 +30,7 @@ namespace MyEcommerceApp.App.Products
         public virtual Volume Volume {get; set;}
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Tax> Taxes { get; set; }
+        public ICollection<ProductCategory> ProductCategories { get; set; }
 
     }
 }

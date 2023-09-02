@@ -14,5 +14,6 @@ namespace MyEcommerceApp.App.Products
         [Key]
         [Column(Order = 2)]
         public Guid TaxId { get; set; }
+        public decimal Rate { get; set; }
     }
 }

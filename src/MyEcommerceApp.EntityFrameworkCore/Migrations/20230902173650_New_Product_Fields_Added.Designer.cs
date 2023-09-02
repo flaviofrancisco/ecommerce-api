@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyEcommerceApp.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using MyEcommerceApp.EntityFrameworkCore;
 namespace MyEcommerceApp.Migrations
 {
     [DbContext(typeof(MyEcommerceAppDbContext))]
-    partial class MyEcommerceAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230902173650_New_Product_Fields_Added")]
+    partial class New_Product_Fields_Added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1542,9 +1545,6 @@ namespace MyEcommerceApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Acronym")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
 
@@ -1569,11 +1569,11 @@ namespace MyEcommerceApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int?>("TenantId")
                         .HasColumnType("int");
+
+                    b.Property<float>("Value")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

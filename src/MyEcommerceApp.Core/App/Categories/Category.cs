@@ -16,6 +16,6 @@ namespace MyEcommerceApp.App.Categories
         public Category Parent { get; set; }
         public string Code { get; set; }
         public ICollection<Product> Products { get; set; }
-
+        public ICollection<ProductCategory> ProductCategories { get; set; }
     }
 }

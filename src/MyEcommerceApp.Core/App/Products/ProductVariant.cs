@@ -15,6 +15,8 @@ namespace MyEcommerceApp.App.Products
         [MaxLength(300), Required]
         public string Ean { get; set; }
         public string Description { get; set; }
+        
+        public int Quantity { get; set; }
 
         public Guid ProductId { get; set; }
 
