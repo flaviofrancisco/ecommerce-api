@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
@@ -15,7 +14,6 @@ using Abp.Localization;
 using Abp.Runtime.Session;
 using Abp.UI;
 using MyEcommerceApp.Authorization;
-using MyEcommerceApp.Authorization.Accounts;
 using MyEcommerceApp.Authorization.Roles;
 using MyEcommerceApp.Authorization.Users;
 using MyEcommerceApp.Roles.Dto;

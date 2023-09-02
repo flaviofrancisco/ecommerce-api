@@ -42,16 +42,19 @@ namespace MyEcommerceApp
             
             Configuration.Settings.SettingEncryptionConfiguration.DefaultPassPhrase = MyEcommerceAppConsts.DefaultPassPhrase;
             SimpleStringCipher.DefaultPassPhrase = MyEcommerceAppConsts.DefaultPassPhrase;
-
-            Configuration.Modules.AbpAutoMapper().Configurators.Add(config =>
-            {
-                AutoMapperConfig.ConfingMapping(config);
-            });
         }
 
         public override void Initialize()
         {
-            IocManager.RegisterAssemblyByConvention(typeof(MyEcommerceAppCoreModule).GetAssembly());
+            var assembly = typeof(MyEcommerceAppCoreModule).GetAssembly();
+
+            IocManager.RegisterAssemblyByConvention(assembly);
+
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(config =>
+            {
+                config.AddMaps(assembly);
+                AutoMapperConfig.ConfingMapping(config);
+            });
         }
 
         public override void PostInitialize()

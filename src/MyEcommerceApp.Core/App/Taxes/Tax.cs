@@ -1,4 +1,5 @@
-﻿using MyEcommerceApp.App.Commons;
+﻿using Abp.Domain.Entities;
+using MyEcommerceApp.App.Commons;
 using MyEcommerceApp.App.Products;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MyEcommerceApp.App.Taxes
 {
     [Table("Taxes")]
-    public class Tax: BaseEntity
+    public class Tax: BaseEntity, ISoftDelete
     {
         [Required]
         [MaxLength(10)] 

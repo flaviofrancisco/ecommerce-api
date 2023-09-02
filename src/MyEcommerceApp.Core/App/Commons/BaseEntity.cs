@@ -13,10 +13,10 @@ namespace MyEcommerceApp.App.Commons
 
         [ForeignKey(nameof(DeleterUserId))]
         public User DeleterUser { get; set; }
-        public DateTime? DeletedDateTime { get; set; }
+        public DateTime? DeletionTime { get; set; }
         public DateTime CreationDateTime { get; set; }
         public long? CreatorUserId { get; set; }
-        public DateTime? LastUpateDateTime { get; set; }
+        public DateTime? LastModificationDateTime { get; set; }
         public long? LastModifierUserId { get; set; }
         public bool IsDeleted { get; set; } = false;
         public int? TenantId { get; set; }
